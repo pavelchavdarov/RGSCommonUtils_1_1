@@ -56,13 +56,9 @@ public class TrustStoreLoader {
      * @throws KeyStoreException
      * @throws KeyManagementException
      */
-    public static SSLContext getTLSContext(KeyStore keyStore, String keyStorePassword, KeyStore trustStore) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-        KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("X509");
-        try {
-            keyManagerFactory.init(keyStore, keyStorePassword.toCharArray());
-        } catch (UnrecoverableKeyException ex) {
-            Logger.getLogger(TrustStoreLoader.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public static SSLContext getTLSContext(KeyStore keyStore, String keyStorePassword, KeyStore trustStore) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException, UnrecoverableKeyException {
+        KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
+        keyManagerFactory.init(keyStore, keyStorePassword.toCharArray());
         KeyManager[] keyManagers = keyManagerFactory.getKeyManagers();
                 
                 

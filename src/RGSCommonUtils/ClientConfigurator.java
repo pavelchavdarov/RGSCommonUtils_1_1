@@ -13,9 +13,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
  * @author p.chavdarov
  */
 public interface ClientConfigurator {
-    public CloseableHttpClient ConfigureSocketLayer();
+    public CloseableHttpClient ConfigureSocketLayer() throws Exception;
     public HttpHost ConfigureTarger();
-    public HttpHost ConfigureProxy();
 //    public CloseableHttpClient ConfigureSocketLayer(String trustStore, String password);
 //    public CloseableHttpClient ConfigureSocketLayer(   String keyStoreResouce,
 //                                            String keyStorePassword,

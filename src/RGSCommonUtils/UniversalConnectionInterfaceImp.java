@@ -37,6 +37,7 @@ public class UniversalConnectionInterfaceImp implements UniversalConnectionInter
     protected HttpHost proxy;
     
     private ClientConfigurator Configurator;
+    private RequestConfigurator requestConfigurator;
     
     protected String responceToString(CloseableHttpResponse response) throws IOException{
         String result = "";
@@ -91,7 +92,6 @@ public class UniversalConnectionInterfaceImp implements UniversalConnectionInter
     public Blob GET_RequestDB(String uri, Object... objects) {
         return null;
     }
-
 
 
     @Override
@@ -177,7 +177,7 @@ public class UniversalConnectionInterfaceImp implements UniversalConnectionInter
      * @return the config
      */
     @Override
-    public ClientConfigurator getConfigurator() {
+    public ClientConfigurator getClientConfigurator() {
         return Configurator;
     }
 
@@ -185,14 +185,26 @@ public class UniversalConnectionInterfaceImp implements UniversalConnectionInter
      * @param config the config to set
      */
     @Override
-    public void setConfigurator(ClientConfigurator config) {
+    public void setClientConfigurator(ClientConfigurator config) {
         this.Configurator = config;
     }
 
     @Override
-    public void Configurate() {
+    public void Configurate() throws Exception {
         httpClient = Configurator.ConfigureSocketLayer();
         target = Configurator.ConfigureTarger();
-        proxy = Configurator.ConfigureProxy();
+        
+        System.out.println("Configurate: target= "+target);
+        System.out.println("Configurate: httpClient= "+httpClient);
+    }
+
+    @Override
+    public RequestConfigurator getRequestConfigurator() {
+        return requestConfigurator;
+    }
+
+    @Override
+    public void setRequestConfigurator(RequestConfigurator config) {
+        requestConfigurator = config;
     }
 }

@@ -33,9 +33,13 @@ public interface UniversalConnectionInterface {
 
     //public void initConnection();
     //public void initConnection(String trustStore, String password) throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException, KeyManagementException;
-    public ClientConfigurator getConfigurator();
-    public void setConfigurator(ClientConfigurator config);
-    public void Configurate();
+    public ClientConfigurator getClientConfigurator();
+    public void setClientConfigurator(ClientConfigurator config);
+    
+    public RequestConfigurator getRequestConfigurator();
+    public void setRequestConfigurator(RequestConfigurator config);
+    
+    public void Configurate() throws Exception;
     public void closeConnection() throws IOException;
 
     public void setProxy(String url, int port, String schema);
