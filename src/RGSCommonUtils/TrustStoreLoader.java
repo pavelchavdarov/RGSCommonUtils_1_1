@@ -120,4 +120,28 @@ public class TrustStoreLoader {
 
     }
     
+    /**
+     * Creates KeyStore instance from key store loaded as resource
+     * @param trustStoreName
+     * @param password
+     * @return
+     * @throws KeyStoreException
+     * @throws CertificateException
+     * @throws NoSuchAlgorithmException
+     * @throws IOException
+     */
+    public static KeyStore loadKeyStorePFX(String trustStoreName, String password) throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException {
+        KeyStore keystore = KeyStore.getInstance("PKCS12");
+        InputStream keystoreStream = TrustStoreLoader.class.getResourceAsStream(trustStoreName);
+        if (keystoreStream == null){
+            IOException ex = new IOException("Key storage " + trustStoreName + " can`t be opened or not found");
+            throw ex;
+        }
+        keystore.load(keystoreStream, password.toCharArray());
+        return keystore;
+
+
+
+    }
+    // 
 }
